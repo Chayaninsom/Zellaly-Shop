@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zellaly Shop - Cart</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+</head>
+
+<body>
+    <div class="top_nav">
+        <p class="tap_nav_p">รวมโปรโมชั่นลดกระหน่ำ 12.12.2023 ลดสูงสุด 50% - OFF 50%!</p>
+    </div>
+
+    <nav class="nav">
+        <div class="nav_container">
+            <a href="./home.html" class="nav_logo">ZELLALY</a>
+            <ul class="nav_list">
+                <li><a href="./home.html" class="nav_link">Home</a></li>
+                <li><a href="./promotion.html" class="nav_link">Promotion</a></li>
+            </ul>
+            <div class="nav_items">
+                <form action="" class="nav_form">
+                    <input type="text" class="nav_input" placeholder="ค้นหาสินค้า" />
+                    <img src="./image/Vector.png" alt="" class="nav_search" />
+                </form>
+                <img src="./image/Wishlist.png" alt="" class="nav_heart" />
+                <a href="./cart.html"><img src="./image/Cart1.png" alt="" class="nav_cart" /></a>
+                <a href="./profile.html"><img src="./image/avatar.png" alt="" class="nav_avatar" /></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cartm">
+        <p>MY CART</p>
+    </div>
+
+    <div class="cartlist">
+        <div class="cartlistitem" data-price="599">
+            <div class="cartlist-l">
+                <img src="./image/Item/item2.jpg" alt="">
+                <div class="cartlistdetali">
+                    <p style="font-size: 2rem;">เสื้อยืดพิมพ์ลายทรงโอเวอร์ไซส์</p>
+                    <p style="font-size: 1.7rem;">599 THB</p>
+                </div>
+            </div>
+            <div class="cartlist-r">
+                <p class="btnc1">-</p>
+                <p style="margin: 0 15px;">1</p>
+                <p class="btnc1">+</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cartlist">
+        <div class="cartlistitem" data-price="1199">
+            <div class="cartlist-l">
+                <img src="./image/Item/item3.jpg" alt="">
+                <div class="cartlistdetali">
+                    <p style="font-size: 2rem;">เสื้อแจ็คเก็ตลายพิเศษ</p>
+                    <p style="font-size: 1.7rem;">1,199 THB</p>
+                </div>
+            </div>
+            <div class="cartlist-r">
+                <p class="btnc1">-</p>
+                <p style="margin: 0 15px;">1</p>
+                <p class="btnc1">+</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn2">
+        <p>ยอดเงินที่ต้องชำระ 0 THB</p>
+        <button class="add_to_cart"><a href="./buy.html" style="color:white; text-decoration:none;">Buy it
+                now</a></button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cartItems = document.querySelectorAll(".cartlistitem");
+            const totalText = document.querySelector(".btn2 p");
+
+            function updateTotal() {
+                let total = 0;
+                cartItems.forEach(item => {
+                    const price = parseFloat(item.dataset.price);
+                    const qty = parseInt(item.querySelector(".cartlist-r p:nth-child(2)").textContent);
+                    total += price * qty;
+                });
+                totalText.textContent = `ยอดเงินที่ต้องชำระ ${total.toLocaleString()} THB`;
+            }
+
+            cartItems.forEach(item => {
+                const minusBtn = item.querySelector(".cartlist-r p:nth-child(1)");
+                const qtyEl = item.querySelector(".cartlist-r p:nth-child(2)");
+                const plusBtn = item.querySelector(".cartlist-r p:nth-child(3)");
+
+                minusBtn.addEventListener("click", () => {
+                    let qty = parseInt(qtyEl.textContent);
+                    if (qty > 1) {
+                        qty--;
+                        qtyEl.textContent = qty;
+                        updateTotal();
+                    }
+                });
+
+                plusBtn.addEventListener("click", () => {
+                    let qty = parseInt(qtyEl.textContent);
+                    qty++;
+                    qtyEl.textContent = qty;
+                    updateTotal();
+                });
+            });
+
+            updateTotal();
+        });
+    </script>
+</body>
+
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .top_nav {
+      width: 100%;
+      height: 4rem;
+      background-color: orangered;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tap_nav_p {
+      color: white;
+      font-size: 1.4rem;
+    }
+
+    .nav {
+      width: 100%;
+      height: 8rem;
+      border-bottom: 1px solid #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nav_container {
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav_logo {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .nav_list {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav_link {
+      color: #000;
+      text-decoration: none;
+      font-size: 1.6rem;
+    }
+
+    .nav_items {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav_form {
+      padding: 0.8rem;
+      background-color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+    }
+
+    .nav_input {
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+
+    .nav_heart,
+    .nav_cart,
+    .nav_avatar {
+      margin-left: 1rem;
+      cursor: pointer;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .nav_avatar:hover,
+    .nav_cart:hover,
+    .nav_heart:hover {
+      transform: scale(1.1);
+    }
+
+    .cartm {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 600;
+      margin-top: 3rem;
+    }
+
+    .cartlist {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .cartlistitem {
+      padding: 2%;
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      border-bottom: 1px solid #ddd;
+      align-items: center;
+    }
+
+    .cartlist-l {
+      display: flex;
+      align-items: center;
+    }
+
+    .cartlist-l img {
+      width: 10vw;
+      height: 10vw;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-right: 2rem;
+    }
+
+    .cartlistdetali p {
+      margin: 0;
+    }
+
+    .cartlist-r {
+      display: flex;
+      align-items: center;
+    }
+
+    .btnc1 {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      cursor: pointer;
+      font-size: 1.8rem;
+      user-select: none;
+    }
+
+    .btn2 {
+      width: 90%;
+      margin: 3rem auto;
+      text-align: right;
+      font-size: 2rem;
+    }
+
+    .add_to_cart {
+      padding: 1.3rem 2.5rem;
+      background-color: orangered;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-size: 1.6rem;
+      transition: 0.3s;
+    }
+
+    .add_to_cart:hover {
+      background-color: #e44b00;
+    }
+  </style>
+</html>
